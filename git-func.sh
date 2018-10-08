@@ -18,3 +18,4 @@ git-init-origin(){
     git remote add origin https://chuanqingli:${passwd}@github.com/chuanqingli/${projname}.git
 }
 
+$1
