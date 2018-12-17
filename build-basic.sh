@@ -29,7 +29,7 @@ set-uml-libs(){
 # batik-all-1.10
 }
 
-build-uml(){
+build-uml22(){
     init-data
     LINES=''
     for yy in $UMLLIBS;do
@@ -51,12 +51,17 @@ build-uml(){
     # java -cp $LINES net.sourceforge.plantuml.Run `find puml|grep .puml$`
 }
 
-build-uml2(){
+build-uml(){
     init-data
     LINES=''
     for yy in $UMLLIBS;do
         LINES=$LINES$LIBREPOSITORYPATH/$yy.jar$SPLITDOT
     done
+
+    if [[ $1 =~ ^- ]];then
+        java -cp $LINES net.sourceforge.plantuml.Run $@
+        return
+    fi
 
     mypwd=`pwd`
     if [[ $# > 0 ]];then
