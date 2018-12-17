@@ -10,7 +10,8 @@ init-data(){
     SPLITDOT=:
     JAVAHOMEBIN=/opt/java/jdk1.6.0_45/bin/
     LIBREPOSITORYPATH=/media/win/E/chuanqing/workspace/repository/lib
-    BUILDARGS=' -Xlint:unchecked -encoding utf-8 -nowarn -source 1.6 -target 1.6 -sourcepath . -d WebRoot/WEB-INF/classes -cp '
+    BUILDARGS=' -encoding utf-8 -nowarn -source 1.6 -target 1.6 -sourcepath . -d WebRoot/WEB-INF/classes -cp '
+    # -Xlint:unchecked
     set-build-libs
     set-uml-libs
 }
@@ -109,6 +110,15 @@ build-src(){
     done
 
     ${JAVAHOMEBIN}javac $BUILDARGS $LINES `find src|grep java$`
+}
+
+git-commit(){
+    git commit -a -m "修改"
+    git push origin master
+}
+
+svn-commit(){
+    svn ci -m "修改"
 }
 
 
