@@ -1,0 +1,16 @@
+/'
+Dependency依赖关系，由依赖的一方指向被依赖的一方。
+Association关联关系。
+Directed Association有方向的关联关系。
+Aggregation聚合
+Composition合成/组成
+Nest嵌套内部类
+Generalization泛化关系
+Realize实现
+'/
+
+'单行注释'
+!define PUML_DEPENDENCY(x,y) x.>y : 依赖
+!define PUML_ASSOCIATION(x,y) x->y : 关联
+!define PUML_AGGREGATION(x,y,a = ' ',b = ' ') x "a" *-> "b" y : 聚合
+!define PUML_COMPOSITION(x,y) x o-> y : 组合
