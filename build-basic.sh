@@ -8,6 +8,7 @@ COMMENT
 #数据初始化区域
 init-data(){
     SPLITDOT=:
+    JAVAHOME=/opt/java/jdk1.6.0_45
     JAVAHOMEBIN=/opt/java/jdk1.6.0_45/bin/
     LIBREPOSITORYPATH=/media/win/E/chuanqing/workspace/repository/lib
     BUILDARGS=' -encoding utf-8 -nowarn -source 1.6 -target 1.6 -sourcepath . -d WebRoot/WEB-INF/classes -cp '
