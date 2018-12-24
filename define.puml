@@ -10,7 +10,9 @@ Realize实现
 '/
 
 '单行注释'
-!define PUML_DEPENDENCY(x,y) x.>y : 依赖
-!define PUML_ASSOCIATION(x,y) x->y : 关联
-!define PUML_AGGREGATION(x,y,a = ' ',b = ' ') x "a" *-> "b" y : 聚合
-!define PUML_COMPOSITION(x,y) x o-> y : 组合
+!define PUML_IMPLEMENTS(x,y) x..|>y : 实现
+!define PUML_EXTENDS(x,y) x--|>y : 继承
+!define PUML_DEPENDENCY(x,y) x..>y : 依赖
+!define PUML_ASSOCIATION(x,y) x-->y : 关联
+!define PUML_AGGREGATION(x,y) x o--> y : 聚合
+!define PUML_COMPOSITION(x,y,a = ' ',b = ' ') x "a" *--> "b" y : 组合
