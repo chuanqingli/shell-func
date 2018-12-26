@@ -1,0 +1,39 @@
+/'
+Dependency依赖关系，由依赖的一方指向被依赖的一方。
+Association关联关系。
+Directed Association有方向的关联关系。
+Aggregation聚合
+Composition合成/组成
+Nest嵌套内部类
+Generalization泛化关系
+Realize实现
+c 关系说明，ab元素说明
+
+    !define PUML_A ..
+    !define PUML_B --
+!define PUML_IMPLEMENT(x,y,c = ' ',a = ' ',b = ' ') x "a" PUML_A|> "b" y : "c"
+!define PUML_EXTEND(x,y,c = ' ',a = ' ',b = ' ') x "a" PUML_B|> "b" y : "c"
+!define PUML_DEPEND(x,y,c = ' ',a = ' ',b = ' ') x "a" PUML_A> "b" y : "c"
+    !define PUML_ASSOCIATE(x,y,c = ' ',a = ' ',b = ' ') x "a" PUML_B> "b" y : "c"
+!define PUML_AGGREGATE(x,y,c = ' ',a = ' ',b = ' ') x "a" oPUML_B> "b" y : "c"
+!define PUML_COMPOSITE(x,y,c = ' ',a = ' ',b = ' ') x "a" *PUML_B> "b" y : "c"
+'/
+
+'单行注释'
+
+    !define WARN_IF(a,n) for(int i=0;i<n;i++){   \
+     a\
+}
+
+!define PUML_A ..
+    !define PUML_B --
+    !define PUML_C o-
+    !define PUML_D *-
+    !define PUML_IMPLEMENT(x,y,c = '实现',a = ' ',b = ' ') x "a" WARN_IF(.,10)|> "b" y : c
+!define PUML_EXTEND(x,y,c = '继承',a = ' ',b = ' ') x "a" PUML_B|> "b" y : c
+
+!define PUML_DEPEND(x,y,c = '依赖',a = ' ',b = ' ') x "a" PUML_A> "b" y : c
+    !define PUML_ASSOCIATE(x,y,c = '关联',a = ' ',b = ' ') x "a" PUML_B> "b" y : c
+
+!define PUML_AGGREGATE(x,y,c = '聚合',a = ' ',b = ' ') x "a" PUML_C> "b" y : c
+!define PUML_COMPOSITE(x,y,c = '组合',a = ' ',b = ' ') x "a" PUML_D> "b" y : c
