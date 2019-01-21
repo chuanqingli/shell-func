@@ -50,3 +50,7 @@ function getchaplist(){
 function getchapinfo(){
     trdbook(arguments);
 }
+
+var book={comefrom:0,bookids:[]};
+
+for(let key in book.bookids)getbookinfo(book.comefrom,book.bookids[key]);
