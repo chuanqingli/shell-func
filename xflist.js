@@ -59,8 +59,18 @@ function savefile(){
     }
     resp.push('</table>');
     console.log(resp);
-    var file = new File(resp, "xflist.xlsx", {type: "html/plain;charset=utf-8"});
-    saveAs(file);
+
+const fileStream = streamSaver.createWriteStream('xflist.xlsx')
+const writer = fileStream.getWriter()
+const encoder = new TextEncoder
+    let uint8array = encoder.encode(resp.join(''))
+
+writer.write(uint8array)
+writer.close()
+
+
+    // var file = new File(resp, "xflist.xlsx", {type: "html/plain;charset=utf-8"});
+    // saveAs(file);
 }
 
 var obj={tindex:11,pageSize:500,pageNumber:1,idw:122592181,dataList:[],lastData:{},resp:false};
