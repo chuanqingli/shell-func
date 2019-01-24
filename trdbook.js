@@ -1,3 +1,4 @@
+var errary=[];
 function trdbook(){
     var op = arguments.callee.caller.name;
     var obj = arguments[0];
@@ -10,11 +11,9 @@ function trdbook(){
 
     var xhr = new XMLHttpRequest();
     xhr.open("get", vurl, true);
-    xhr.onreadystatechange = function(){
-        //若响应完成且请求成功
-        if(xhr.readyState != 4)return;
-
+    xhr.onload = function(){
         if(xhr.status != 200){
+            errary.push([op,'(',comefrom,',',bookid,',',chapterid,');'].join(''));
             console.error([xhr.status,'=>',vurl].join(''));
             return;
         }
