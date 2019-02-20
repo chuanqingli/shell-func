@@ -42,4 +42,9 @@ git-clone(){
     git clone https://github.com/chuanqingli/${projname}.git
 }
 
+# 解决 *** 请告诉我你是谁。
+tell-who-are-you(){
+    git config --global user.email '9915252@qq.com' && git config --global user.name 'chuanqingli'
+}
+
 $1
