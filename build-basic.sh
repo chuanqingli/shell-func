@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/busybox
 
 <<'COMMENT'
 知识点：
@@ -6,10 +6,10 @@ xdotool getmouselocation #得到鼠标点位置
 COMMENT
 
 #数据初始化区域
-init-data(){
+initData(){
     SPLITDOT=:
     JAVAHOMEBIN=/opt/java/jdk1.6.0_45/bin/
-    if [[ ! -d $JAVAHOMEBIN ]];then
+    if [ ! -d $JAVAHOMEBIN ];then
         JAVAHOMEBIN=''
     else
         echo "===>$JAVAHOMEBIN"
@@ -20,19 +20,19 @@ init-data(){
     # -Xlint:unchecked
 
     # 子程序需要实现以下5个方法
-    set-build-libs
-    set-uml-libs
-    set-resin-conf-name
-    set-ice-main-class
+    setBuildLibs
+    setUmlLibs
+    setResinConfName
+    setIceMainClass
 }
 
-set-build-libs(){
+setBuildLibs(){
     BUILDLIBS='
 
 '
 }
 
-set-uml-libs(){
+setUmlLibs(){
     UMLLIBS='
     plantuml
     jlatexmath-1.0.4
@@ -40,26 +40,26 @@ set-uml-libs(){
 # batik-all-1.10
 }
 
-set-resin-conf-name(){
+setResinConfName(){
     RESINCONFNAME=''
 }
 
-set-ice-proj-name(){
+setIceProjName(){
     ICEPROJNAME=''
 }
 
-set-ice-main-class(){
+setIceMainClass(){
     ICEMAINCLASS='cn.tianya.fw.server.component.ice.ComponentServer'
 }
 
-build-uml22(){
-    init-data
+buildUml22(){
+    initData
     LINES=''
     for yy in $UMLLIBS;do
         LINES=$LINES$LIBREPOSITORYPATH/$yy.jar$SPLITDOT
     done
 
-    if [[ $1 =~ ^- ]];then
+    if [ $1 =~ ^- ];then
         java -cp $LINES net.sourceforge.plantuml.Run $@
         return
     fi
@@ -74,22 +74,22 @@ build-uml22(){
     # java -cp $LINES net.sourceforge.plantuml.Run `find puml|grep .puml$`
 }
 
-build-uml(){
-    init-data
+buildUml(){
+    initData
     LINES=''
     for yy in $UMLLIBS;do
         LINES=$LINES$LIBREPOSITORYPATH/$yy.jar$SPLITDOT
     done
 
-    if [[ $1 =~ ^- ]];then
+    if [ $1 =~ ^- ];then
         java -cp $LINES net.sourceforge.plantuml.Run $@
         return
     fi
 
     mypwd=`pwd`
-    if [[ $# > 0 ]];then
+    if [ $# > 0 ];then
         for yy in $@;do
-            if [[ ! -f $yy ]];then
+            if [ ! -f $yy ];then
                 echo "${yy}不存在!"
                 continue
             fi
@@ -107,8 +107,8 @@ build-uml(){
     # java -cp $LINES net.sourceforge.plantuml.Run `find puml|grep .puml$`
 }
 
-run-class(){
-    init-data
+runClass(){
+    initData
     LINES=''
     for yy in $BUILDLIBS;do
         LINES=$LINES$LIBREPOSITORYPATH/$yy.jar$SPLITDOT
@@ -117,15 +117,15 @@ run-class(){
     ${JAVAHOMEBIN}java -cp $LINES'WebRoot/WEB-INF/classes' $@
 }
 
-clear-class(){
+clearClass(){
     for yy in $@;do
         rm -rf WebRoot/WEB-INF/classes/$yy
     done
     # rm -rf WebRoot/WEB-INF/classes/cn/tianya
 }
 
-build-src(){
-    init-data
+buildSrc(){
+    initData
     LINES=''
     for yy in $BUILDLIBS;do
         LINES=$LINES$LIBREPOSITORYPATH/$yy.jar$SPLITDOT
@@ -135,8 +135,8 @@ build-src(){
 }
 
 #调用前要指定 RESINCONFNAME
-start-resin(){
-    init-data
+startResin(){
+    initData
 
     class=com.caucho.server.resin.Resin
     resinhome=/media/win/E/resin-3.0.21
@@ -154,8 +154,8 @@ start-resin(){
 }
 
 #调用前要指定 ICEMAINCLASS
-start-ice(){
-    init-data
+startIce(){
+    initData
     basepath=$(cd `dirname $0`; pwd)
     LINES="$basepath/WebRoot/WEB-INF/resources/:"
     for yy in $BUILDLIBS;do
@@ -168,17 +168,17 @@ jvmarg='-Xmx2048m -Xms2048m -Xmn1024m -Xss256k -XX:PermSize=128m -XX:MaxPermSize
    ${JAVAHOMEBIN}java -cp ${LINES} $jvmarg ${ICEMAINCLASS}
 }
 
-git-commit(){
+gitCommit(){
     git commit -a -m "修改"
     git push origin master
 }
 
-svn-commit(){
+svnCommit(){
     svn ci -m "修改"
 }
 
 
-test-echo(){
+testEcho(){
 echo "你好"$1"==="
 echo "你好"$2"==="
 echo "你好"$3"==="
